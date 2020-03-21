@@ -1,4 +1,7 @@
+import { BudgetService } from './budget.service';
 import { Component, OnInit } from '@angular/core';
+
+import { IExpenseItem, IIncomeItem } from '../models/interfaces';
 
 @Component({
   selector: 'app-budget',
@@ -6,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./budget.component.scss']
 })
 export class BudgetComponent implements OnInit {
+  incomeList: IIncomeItem[] = [];
+  expenseList: IExpenseItem[] = [];
 
-  constructor() { }
+  constructor(private service: BudgetService) { }
 
   ngOnInit() {
+    this.getExpenseItems();
+    this.getIncomeItems();
   }
 
+  getExpenseItems() {
+    this.service.getExpenseItems().subscribe({
+      next: (data) => (this.expenseList = data)
+    });
+  }
+
+  getIncomeItems() {
+    this.service.getIncomeItems().subscribe({
+      next: (data) => (this.incomeList = data)
+    });
+  }
 }
