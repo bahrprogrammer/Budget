@@ -1,7 +1,7 @@
 import { BudgetService } from './budget.service';
 import { Component, OnInit } from '@angular/core';
 
-import { IExpenseItem, IIncomeItem } from '../models/interfaces';
+import { IBudgetItem } from '../models/interfaces';
 
 @Component({
   selector: 'app-budget',
@@ -9,8 +9,8 @@ import { IExpenseItem, IIncomeItem } from '../models/interfaces';
   styleUrls: ['./budget.component.scss']
 })
 export class BudgetComponent implements OnInit {
-  incomeList: IIncomeItem[] = [];
-  expenseList: IExpenseItem[] = [];
+  incomeList: IBudgetItem[] = [];
+  expenseList: IBudgetItem[] = [];
 
   constructor(private service: BudgetService) { }
 

@@ -1,0 +1,17 @@
+<h3>{{listTitle}}</h3>
+      <table class="table table-sm table-hover table-bordered m-2">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Source</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let income of items">
+            <th scope="row">{{income.date | date}}</th>
+            <td>{{income.source}}</td>
+            <td>{{income.amount | currency}}</td>
+          </tr>
+        </tbody>
+      </table>

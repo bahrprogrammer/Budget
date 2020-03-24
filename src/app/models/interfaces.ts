@@ -1,11 +1,4 @@
-export interface IExpenseItem {
-  id: number;
-  date: Date;
-  category: string;
-  amount: number;
-}
-
-export interface IIncomeItem {
+export interface IBudgetItem {
   id: number;
   date: Date;
   source: string;
