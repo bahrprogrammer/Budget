@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CommonModule } from '@angular/common';
 import { BudgetComponent } from './budget.component';
 import { BudgetItemListComponent } from './budget-item-list/budget-item-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 const budgetRoutes: Routes = [
   { path: 'budget', component: BudgetComponent }
@@ -12,8 +12,8 @@ const budgetRoutes: Routes = [
 @NgModule({
   declarations: [BudgetComponent, BudgetItemListComponent],
   imports: [
-    CommonModule,
-    RouterModule.forChild(budgetRoutes)
+    RouterModule.forChild(budgetRoutes),
+    SharedModule
   ]
 })
 export class BudgetModule { }
