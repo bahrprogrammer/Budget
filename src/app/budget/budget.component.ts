@@ -19,6 +19,18 @@ export class BudgetComponent implements OnInit {
     this.getIncomeItems();
   }
 
+  addExpenseItem(item: IBudgetItem) {
+    this.service.addExpenseItem(item).subscribe({
+      next: (data) => (this.expenseList = data)
+    });
+  }
+
+  addIncomeItem(item: IBudgetItem) {
+    this.service.addIncomeItem(item).subscribe({
+      next: (data) => (this.expenseList = data)
+    });
+  }
+
   getExpenseItems() {
     this.service.getExpenseItems().subscribe({
       next: (data) => (this.expenseList = data)

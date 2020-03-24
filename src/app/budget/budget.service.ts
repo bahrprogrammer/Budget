@@ -22,6 +22,18 @@ export class BudgetService {
 
   constructor() { }
 
+  addExpenseItem(item: IBudgetItem): Observable<IBudgetItem[]> {
+    this.expenseList.push(item);
+
+    return of(this.expenseList);
+  }
+
+  addIncomeItem(item: IBudgetItem): Observable<IBudgetItem[]> {
+    this.incomeList.push(item);
+
+    return of(this.incomeList);
+  }
+
   getExpenseItems(): Observable<IBudgetItem[]> {
     return of(this.expenseList);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IBudgetItem } from '../../models/interfaces';
 
 @Component({
@@ -13,9 +13,15 @@ export class BudgetItemListComponent implements OnInit {
   @Input()
   listTitle = 'budget';
 
+  @Output()
+  addItem = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  add() {
+    this.addItem.emit();
+  }
 }
