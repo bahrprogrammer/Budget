@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IBudgetItem } from '../../models/interfaces';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-budget-item-list',
@@ -16,12 +17,32 @@ export class BudgetItemListComponent implements OnInit {
   @Output()
   addItem = new EventEmitter();
 
-  constructor() { }
+  itemForm: FormGroup;
+
+  newItem: IBudgetItem = {
+    id: null,
+    date: null,
+    source: null,
+    amount: null
+  };
+
+  constructor(private builder: FormBuilder) { }
 
   ngOnInit() {
+    this.initializeFormGroup();
   }
 
+
   add() {
-    this.addItem.emit();
+    console.log(this.itemForm);
+    // this.addItem.emit();
+  }
+
+  initializeFormGroup() {
+    this.itemForm = this.builder.group({
+      date: '',
+      source: '',
+      amount: ''
+    });
   }
 }

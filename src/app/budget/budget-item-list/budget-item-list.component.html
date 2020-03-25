@@ -1,17 +1,41 @@
 <h3>{{listTitle}}</h3>
-      <table class="table table-sm table-hover table-bordered m-2">
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Source</th>
-            <th scope="col">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let income of items">
-            <th scope="row">{{income.date | date}}</th>
-            <td>{{income.source}}</td>
-            <td>{{income.amount | currency}}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="col-12">
+  <form novalidate (ngSubmit)="add()" [formGroup]="itemForm">
+    <div class="form-row">
+      <div class="col-3">
+        <label class="col-form-label" for="dateId">Date</label>
+        <input class="form-control"
+              id="dateId"
+              type="text"
+              required
+              formControlName="date" />
+      </div>
+      <div class="col-3">
+        <label class="col-form-label" for="sourceId">Source</label>
+        <input class="form-control"
+              id="sourceId"
+              type="text"
+              required
+              formControlName="source" />
+      </div>
+      <div class="col-3">
+        <label class="col-form-label" for="amountId">Amount</label>
+        <input class="form-control"
+              id="amountId"
+              type="text"
+              required
+              formControlName="amount" />
+      </div>
+      <div class="col-2">
+        <div class="mt-5">
+          <button class="btn btn-sm btn-primary"
+                  type="submit"
+                  [disabled]="!itemForm.valid">Add</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngFor="let item of items">
+  <app-budget-item [item]="item"></app-budget-item>
+</div>
