@@ -12,6 +12,22 @@ export class BudgetComponent implements OnInit {
   incomeList: IBudgetItem[] = [];
   expenseList: IBudgetItem[] = [];
 
+  get expenseTotal(): number {
+    let total = 0;
+    for (const exp of this.expenseList) {
+      total += exp.amount;
+    }
+    return total;
+  }
+
+  get incomeTotal(): number {
+    let total = 0;
+    for (const exp of this.incomeList) {
+      total += exp.amount;
+    }
+    return total;
+  }
+
   constructor(private service: BudgetService) { }
 
   ngOnInit() {
