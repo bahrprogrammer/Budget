@@ -7,13 +7,12 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-3">
+  <div class="d-flex">
+    <div class="d-flex flex-column w-50">
       <app-budget-item-list [(items)]="incomeList" [listTitle]="'Income'"></app-budget-item-list>
-    </div>
-    <div class="col-md-3">
+      <br>
       <app-budget-item-list [(items)]="expenseList" [listTitle]="'Expenses'"></app-budget-item-list>
     </div>
-    <div class="col-md-6 bg-primary">place a calendar here</div>
+    <div class="bg-warning w-50">place a calendar here</div>
   </div>
 </div>
