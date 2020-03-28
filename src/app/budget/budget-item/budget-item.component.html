@@ -1,0 +1,19 @@
+<div class="card w-75">
+  <div class="card-body">
+    <div class="d-flex ml-3">
+      <div class="w-25 mt-2">{{item.date | date}}</div>
+      <div class="w-25 mt-2">{{item.source}}</div>
+      <div class="w-25 mt-2 text-right">{{item.amount | currency}}</div>
+
+      <div class="d-flex flex-row-reverse w-25">
+        <button class="text-danger"
+                mat-icon-button
+                matTooltip="Remove item"
+                matTooltipPosition="right"
+                (click)="remove()">
+                <span class="material-icons">remove</span></button>
+      </div>
+
+    </div>
+  </div>
+</div>
