@@ -12,6 +12,11 @@ export class BudgetHeaderComponent implements OnInit {
   @Input()
   expenseTotal: number;
 
+
+  get remainder(): number {
+    return this.incomeTotal - this.expenseTotal;
+  }
+
   constructor() { }
 
   ngOnInit() {

@@ -22,8 +22,8 @@ export class BudgetComponent implements OnInit {
 
   get incomeTotal(): number {
     let total = 0;
-    for (const exp of this.incomeList) {
-      total += exp.amount;
+    for (const inc of this.incomeList) {
+      total += inc.amount;
     }
     return total;
   }

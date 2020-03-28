@@ -1,9 +1,11 @@
-<div class="d-flex">
+<div class="d-flex flex-row justify-content-end align-items-center">
   <div class="w-50"></div>
-  <div class="w-50">
-    <div>
-      <h1>Money left over<br><span class="badge badge-danger">{{incomeTotal}} - {{expenseTotal}} = Not enough</span></h1>
-    </div>
+  <div>
+    <h3>Balance<br>
+      <span class="badge badge-danger">
+        {{remainder | currency}}
+      </span>
+    </h3>
   </div>
 </div>
 
