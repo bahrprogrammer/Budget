@@ -34,6 +34,16 @@ export class BudgetService {
     return of(this.incomeList);
   }
 
+  removeExpenseItem(item: IBudgetItem) {
+    const index = this.expenseList.indexOf(item);
+    this.expenseList.splice(index, 1);
+  }
+
+  removeIncomeItem(item: IBudgetItem) {
+    const index = this.incomeList.indexOf(item);
+    this.incomeList.splice(index, 1);
+  }
+
   getExpenseItems(): Observable<IBudgetItem[]> {
     return of(this.expenseList);
   }

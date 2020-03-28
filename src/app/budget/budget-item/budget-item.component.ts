@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IBudgetItem } from '../../models/interfaces';
 
 @Component({
@@ -10,9 +10,15 @@ export class BudgetItemComponent implements OnInit {
   @Input()
   item: IBudgetItem;
 
+  @Output()
+  removeItem = new EventEmitter<IBudgetItem>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  remove() {
+    this.removeItem.emit(this.item);
+  }
 }

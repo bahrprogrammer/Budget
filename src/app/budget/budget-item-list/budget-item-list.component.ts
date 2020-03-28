@@ -15,7 +15,10 @@ export class BudgetItemListComponent implements OnInit {
   listTitle = 'budget';
 
   @Output()
-  addItem = new EventEmitter();
+  addItem = new EventEmitter<IBudgetItem>();
+
+  @Output()
+  removeItem = new EventEmitter<IBudgetItem>();
 
   itemForm: FormGroup;
 
@@ -33,9 +36,12 @@ export class BudgetItemListComponent implements OnInit {
   }
 
 
-  add() {
-    console.log(this.itemForm);
-    // this.addItem.emit();
+  add(item: IBudgetItem) {
+    this.addItem.emit(item);
+  }
+
+  remove(item: IBudgetItem) {
+    this.removeItem.emit(item);
   }
 
   initializeFormGroup() {

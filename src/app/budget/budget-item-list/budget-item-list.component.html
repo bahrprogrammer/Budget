@@ -25,5 +25,5 @@
   </form>
 </div>
 <div *ngFor="let item of items" class="d-flex flex-column p-0">
-  <app-budget-item [item]="item"></app-budget-item>
+  <app-budget-item [item]="item" (removeItem)="remove($event)"></app-budget-item>
 </div>
