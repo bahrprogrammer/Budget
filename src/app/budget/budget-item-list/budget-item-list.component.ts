@@ -36,8 +36,10 @@ export class BudgetItemListComponent implements OnInit {
   }
 
 
-  add(item: IBudgetItem) {
+  add() {
+    const item: IBudgetItem = this.itemForm.value;
     this.addItem.emit(item);
+    this.initializeFormGroup();
   }
 
   remove(item: IBudgetItem) {

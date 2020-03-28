@@ -1,6 +1,6 @@
 <h3 class="mt-2">{{listTitle}}</h3>
 <div class="d-flex m-3 justify-content-center">
-  <form novalidate (ngSubmit)="add()" [formGroup]="itemForm">
+  <form (ngSubmit)="add()" [formGroup]="itemForm">
     <mat-form-field class="m-2">
       <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date" >

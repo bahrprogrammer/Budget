@@ -35,20 +35,15 @@ export class BudgetComponent implements OnInit {
     this.getIncomeItems();
   }
 
-  addItem(item: IBudgetItem, list: string) {
+  add(item: IBudgetItem, list: string) {
     if (list === 'expenses') {
-      this.service.addExpenseItem(item).subscribe({
-        next: (data) => (this.expenseList = data)
-      });
+      this.service.addExpenseItem(item);
     } else if (list === 'income') {
-      this.service.addIncomeItem(item).subscribe({
-        next: (data) => (this.expenseList = data)
-      });
+      this.service.addIncomeItem(item);
     }
   }
 
   removeItem(item: IBudgetItem, list: string) {
-    console.log(item, list);
     if (list === 'expenses') {
       this.service.removeExpenseItem(item);
     } else if (list === 'income') {

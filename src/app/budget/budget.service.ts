@@ -22,16 +22,13 @@ export class BudgetService {
 
   constructor() { }
 
-  addExpenseItem(item: IBudgetItem): Observable<IBudgetItem[]> {
+  addExpenseItem(item: IBudgetItem) {
     this.expenseList.push(item);
-
-    return of(this.expenseList);
   }
 
-  addIncomeItem(item: IBudgetItem): Observable<IBudgetItem[]> {
+  addIncomeItem(item: IBudgetItem) {
     this.incomeList.push(item);
-
-    return of(this.incomeList);
+    this.incomeList.sort((a, b) => (a.date > b.date) ? 1 : -1);
   }
 
   removeExpenseItem(item: IBudgetItem) {
