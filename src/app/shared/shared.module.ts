@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+import { ChartsModule } from 'ng2-charts';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -12,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [],
   imports: [
+    ChartsModule,
     CommonModule,
     MatButtonModule,
     MatDatepickerModule,
@@ -20,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
   ],
   exports: [
+    ChartsModule,
     CommonModule,
     MatButtonModule,
     MatDatepickerModule,

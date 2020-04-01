@@ -24,6 +24,7 @@ export class BudgetService {
 
   addExpenseItem(item: IBudgetItem) {
     this.expenseList.push(item);
+    this.expenseList.sort((a, b) => (a.date > b.date) ? 1 : -1);
   }
 
   addIncomeItem(item: IBudgetItem) {
@@ -42,10 +43,12 @@ export class BudgetService {
   }
 
   getExpenseItems(): Observable<IBudgetItem[]> {
+    this.expenseList.sort((a, b) => (a.date > b.date) ? 1 : -1);
     return of(this.expenseList);
   }
 
   getIncomeItems(): Observable<IBudgetItem[]> {
+    this.incomeList.sort((a, b) => (a.date > b.date) ? 1 : -1);
     return of(this.incomeList);
   }
 }

@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label, BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-budget-header',
@@ -7,11 +10,53 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BudgetHeaderComponent implements OnInit {
   @Input()
-  incomeTotal: number;
+  incomeTotal: number = 0;
 
   @Input()
-  expenseTotal: number;
+  expenseTotal: number = 0;
 
+  @ViewChild(BaseChartDirective)
+  public chart: BaseChartDirective;
+
+  get badgeClass(): string {
+    const percent = (this.expenseTotal / this.incomeTotal);
+    const highRisk = .85;
+    const mediumRisk = .5;
+
+    if (percent > highRisk) {
+      return 'badge badge-danger';
+    } else if ( percent > mediumRisk) {
+      return 'badge badge-dark';
+    } else {
+      return 'badge badge-success';
+    }
+  }
+
+  barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          display: false
+        },
+        gridLines: {
+          display: false
+        }
+      }]
+    }
+  };
+  barChartLabels: Label[] = ['Expenses', 'Income'];
+  barChartType: ChartType = 'bar';
+  barChartLegend = false;
+  barChartPlugins = [];
+
+  barChartData: ChartDataSets[] = [];
 
   get remainder(): number {
     return this.incomeTotal - this.expenseTotal;
@@ -20,6 +65,35 @@ export class BudgetHeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.barChartData = [
+      {
+        data: [this.expenseTotal, this.incomeTotal],
+        label: 'Budget totals',
+        backgroundColor: [
+          'rgba(204, 0, 0)',
+          'rgba(0, 153, 0)'
+        ]
+      }
+    ];
   }
 
+  updateChart() {
+    setTimeout(() => {
+      this.barChartData = [
+        {
+          data: [this.expenseTotal, this.incomeTotal],
+          label: 'Budget totals',
+          backgroundColor: [
+            'rgba(204, 0, 0)',
+            'rgba(0, 153, 0)'
+          ]
+        }
+      ];
+    }, 500);
+    this.chart.chart.update();
+  }
+
+  updateBadge() {
+
+  }
 }
