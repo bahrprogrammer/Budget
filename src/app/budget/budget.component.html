@@ -5,7 +5,6 @@
   <div class="d-flex">
     <div class="d-flex flex-column w-50">
       <app-budget-item-list [(items)]="incomeList" [listTitle]="'Income'" (addItem)="add($event, 'income')" (removeItem)="removeItem($event, 'income')"></app-budget-item-list>
-      <br>
       <app-budget-item-list [(items)]="expenseList" [listTitle]="'Expenses'" (addItem)="add($event, 'expenses')" (removeItem)="removeItem($event, 'expenses')"></app-budget-item-list>
     </div>
     <div class="bg-warning w-50">place a calendar here</div>

@@ -1,11 +1,25 @@
-<div class="d-flex flex-row justify-content-end align-items-center">
+<div class="d-flex">
   <div class="w-50"></div>
-  <div>
-    <h3>Balance<br>
-      <span class="badge badge-danger">
-        {{remainder | currency}}
-      </span>
-    </h3>
+  <div class="d-flex flex-row justify-content-around align-items-center w-50">
+    <div class="chart-wrapper mt-3">
+      <canvas baseChart class="chart"
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+      </canvas>
+    </div>
+    <div>
+      <h3>Balance
+      </h3>
+      <h1>
+        <span [ngClass]="badgeClass">
+          {{remainder | currency}}
+        </span>
+      </h1>
+    </div>
   </div>
 </div>
 

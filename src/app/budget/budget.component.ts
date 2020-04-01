@@ -1,7 +1,8 @@
 import { BudgetService } from './budget.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { IBudgetItem } from '../models/interfaces';
+import { BudgetHeaderComponent } from './budget-header/budget-header.component';
 
 @Component({
   selector: 'app-budget',
@@ -9,6 +10,9 @@ import { IBudgetItem } from '../models/interfaces';
   styleUrls: ['./budget.component.scss']
 })
 export class BudgetComponent implements OnInit {
+  @ViewChild(BudgetHeaderComponent)
+  private budgetHeaderComponent: BudgetHeaderComponent;
+
   incomeList: IBudgetItem[] = [];
   expenseList: IBudgetItem[] = [];
 
@@ -41,6 +45,7 @@ export class BudgetComponent implements OnInit {
     } else if (list === 'income') {
       this.service.addIncomeItem(item);
     }
+    this.budgetHeaderComponent.updateChart();
   }
 
   removeItem(item: IBudgetItem, list: string) {
@@ -49,6 +54,7 @@ export class BudgetComponent implements OnInit {
     } else if (list === 'income') {
       this.service.removeIncomeItem(item);
     }
+    this.budgetHeaderComponent.updateChart();
   }
 
   getExpenseItems() {
