@@ -1,5 +1,9 @@
 @import "../../../variables.scss";
 
 .day-cell {
-  min-height: 6em;
+  min-width: 5em;
+}
+
+.week-row {
+  min-height: 50px;
 }
