@@ -2,8 +2,40 @@
 
 .day-cell {
   min-width: 5em;
+  vertical-align: bottom;
 }
 
-.week-row {
-  min-height: 50px;
+.calendar-item {
+  font-size: 70%;
+  font-weight: 600;
 }
+
+.balance {
+  font-size: 65%;
+  font-weight: 550;
+}
+
+.table tbody tr, .table tbody td {
+  height: 6em;
+}
+
+.table-bordered tbody tr {
+  border: 2px solid $border;
+}
+
+.table-bordered tbody tr td {
+  border: 2px solid $border;
+}
+
+.table-bordered thead tr {
+  border: 2px solid $border;
+}
+
+.table-bordered thead tr th {
+  border: 2px solid $border;
+}
+
+.table-bordered {
+  border: 2px solid $border;
+}
+

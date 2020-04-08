@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { IBudgetItem } from '../models/interfaces';
 import { BudgetHeaderComponent } from './budget-header/budget-header.component';
+import { BudgetCalendarComponent } from './budget-calendar/budget-calendar.component';
 
 @Component({
   selector: 'app-budget',
@@ -11,7 +12,10 @@ import { BudgetHeaderComponent } from './budget-header/budget-header.component';
 })
 export class BudgetComponent implements OnInit {
   @ViewChild(BudgetHeaderComponent)
-  private budgetHeaderComponent: BudgetHeaderComponent;
+  private header: BudgetHeaderComponent;
+
+  @ViewChild(BudgetCalendarComponent)
+  private calendar: BudgetCalendarComponent;
 
   incomeList: IBudgetItem[] = [];
   expenseList: IBudgetItem[] = [];
@@ -42,19 +46,23 @@ export class BudgetComponent implements OnInit {
   add(item: IBudgetItem, list: string) {
     if (list === 'expenses') {
       this.service.addExpenseItem(item);
+      this.calendar.addExpenseToCalendar(item);
     } else if (list === 'income') {
       this.service.addIncomeItem(item);
+      this.calendar.addIncomeToCalendar(item);
     }
-    this.budgetHeaderComponent.updateChart();
+    this.header.updateChart();
   }
 
   removeItem(item: IBudgetItem, list: string) {
     if (list === 'expenses') {
       this.service.removeExpenseItem(item);
+      this.calendar.removeExpenseFromCalendar(item);
     } else if (list === 'income') {
       this.service.removeIncomeItem(item);
+      this.calendar.removeIncomeFromCalendar(item);
     }
-    this.budgetHeaderComponent.updateChart();
+    this.header.updateChart();
   }
 
   getExpenseItems() {

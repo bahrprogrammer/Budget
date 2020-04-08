@@ -7,4 +7,7 @@ export interface IBudgetItem {
 
 export interface IDay {
   day: number;
+  dailyExpenses: IBudgetItem[];
+  dailyIncome: IBudgetItem[];
+  dailyTotal: number;
 }
