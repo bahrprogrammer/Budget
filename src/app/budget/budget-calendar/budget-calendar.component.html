@@ -1,8 +1,8 @@
-<div class="d-flex flex-column">
-  <div class="d-flex justify-content-around">
+<div class="d-flex flex-column p-5">
+  <div class="d-flex mb-3 justify-content-around">
     <h2>{{monthYearDisplay}}</h2>
   </div>
-  <div>
+  <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -17,26 +17,26 @@
       </thead>
       <tbody>
         <tr *ngFor="let row of calendarWeeks">
-          <td *ngFor="let d of row" class="day-cell">
-            <div *ngIf="d" class="d-flex">
-              <div class="align-self-end text-left w-25">
+          <td *ngFor="let d of row" class="day-cell text-truncate">
+            <div *ngIf="d" class="d-flex h-100">
+              <div class="align-self-start text-left w-25">
                 <span class="badge badge-pill badge-dark">{{d.day}}</span>
               </div>
-              <div class="d-flex flex-column w-75">
+              <div class="d-flex flex-column flex-fill h-100">
                 <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0 text-right">
-                  <li *ngFor="let item of d.dailyIncome" class="calendar-item income">
+                  <li *ngFor="let item of d.dailyIncome" class="calendar-item">
                     <span data-toggle="tooltip" data-placement="top" title="{{item.source}}: {{item.amount | currency}}">{{item.source}}: {{item.amount | currency}}</span>
                   </li>
                   <hr *ngIf="d.dailyExpenses.length > 0">
                 </ul>
                 <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0 text-right">
-                  <li *ngFor="let item of d.dailyExpenses" class="calendar-item expense">
+                  <li *ngFor="let item of d.dailyExpenses" class="calendar-item">
                     <span data-toggle="tooltip" data-placement="top" title="{{item.source}}: -{{item.amount | currency}}">{{item.source}}: -{{item.amount | currency}}</span>
                   </li>
                 </ul>
-                <div>
+                <div class="mt-auto ml-auto">
                   <hr *ngIf="d.dailyIncome.length > 0 || d.dailyExpenses.length > 0">
-                  <span  data-toggle="tooltip" data-placement="top" title="Balance: {{d.dailyTotal | currency}}" class="badge badge-pill badge-success balance text-right">{{d.dailyTotal | currency}}</span>
+                  <span data-toggle="tooltip" data-placement="top" title="Balance: {{d.dailyTotal | currency}}" class="badge badge-pill badge-success calendar-item text-right">{{d.dailyTotal | currency}}</span>
                 </div>
               </div>
             </div>

@@ -15,7 +15,7 @@ export class BudgetCalendarComponent implements OnInit {
   expenseList: IBudgetItem[];
 
   @Input()
-  total: number;
+  startingBalance: number = 0;
 
   today = new Date();
   currentMonth = this.today.getMonth();
@@ -29,7 +29,6 @@ export class BudgetCalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCalendarWeeks();
-    console.log(this.calendarWeeks);
   }
 
   addExpenseToCalendar(expense: IBudgetItem): void {
@@ -177,8 +176,9 @@ export class BudgetCalendarComponent implements OnInit {
 
   updateDailyTotals(): void {
     let total = 0;
-    if (this.total > 0) {
-      total = this.total;
+
+    if (this.startingBalance && this.startingBalance > 0) {
+      total = this.startingBalance
     }
 
     this.calendarWeeks.forEach(w => {

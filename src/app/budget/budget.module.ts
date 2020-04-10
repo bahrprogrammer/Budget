@@ -13,7 +13,13 @@ const budgetRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BudgetComponent, BudgetItemListComponent, BudgetItemComponent, BudgetHeaderComponent, BudgetCalendarComponent],
+  declarations: [
+    BudgetComponent,
+    BudgetItemListComponent,
+    BudgetItemComponent,
+    BudgetHeaderComponent,
+    BudgetCalendarComponent
+  ],
   imports: [
     RouterModule.forChild(budgetRoutes),
     SharedModule

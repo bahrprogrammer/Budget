@@ -1,14 +1,14 @@
 <div class="container-flex text-center">
   <div id="page-header">
-    <app-budget-header [expenseTotal]="expenseTotal" [incomeTotal]="incomeTotal"></app-budget-header>
+    <app-budget-header #header [expenseTotal]="expenseTotal" [incomeTotal]="incomeTotal" (update)="updateBalance()"></app-budget-header>
   </div>
-  <div class="d-flex">
-    <div class="d-flex flex-column w-50">
+  <div class="d-flex flex-row flex-wrap">
+    <div class="d-flex flex-column justify-content-around flex-fill">
       <app-budget-item-list [(items)]="incomeList" [listTitle]="'Income'" (addItem)="add($event, 'income')" (removeItem)="removeItem($event, 'income')"></app-budget-item-list>
       <app-budget-item-list [(items)]="expenseList" [listTitle]="'Expenses'" (addItem)="add($event, 'expenses')" (removeItem)="removeItem($event, 'expenses')"></app-budget-item-list>
     </div>
-    <div class="w-50 m-3">
-      <app-budget-calendar [(expenseList)]="expenseList" [(incomeList)]="incomeList"></app-budget-calendar>
+    <div class="flex-fill w-50">
+      <app-budget-calendar [expenseList]="expenseList" [incomeList]="incomeList" [(startingBalance)]="header.startingBalance"></app-budget-calendar>
     </div>
   </div>
 </div>

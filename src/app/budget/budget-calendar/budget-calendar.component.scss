@@ -6,13 +6,15 @@
 }
 
 .calendar-item {
-  font-size: 70%;
-  font-weight: 600;
+  font-weight: 550;
 }
 
 .balance {
-  font-size: 65%;
   font-weight: 550;
+}
+
+.badge-dark {
+  background: $border;
 }
 
 .table tbody tr, .table tbody td {
@@ -20,22 +22,23 @@
 }
 
 .table-bordered tbody tr {
-  border: 2px solid $border;
+  border: 1px solid $border;
 }
 
 .table-bordered tbody tr td {
-  border: 2px solid $border;
+  border: 1px solid $border;
 }
 
 .table-bordered thead tr {
-  border: 2px solid $border;
+  border: 1px solid $border;
+  background: $background-emphasis;
 }
 
 .table-bordered thead tr th {
-  border: 2px solid $border;
+  border: 1px solid $border;
 }
 
 .table-bordered {
-  border: 2px solid $border;
+  border: 1px solid $border;
 }
 

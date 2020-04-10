@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -24,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   exports: [
     ChartsModule,
     CommonModule,
+    FormsModule,
     MatButtonModule,
     MatDatepickerModule,
     MatInputModule,

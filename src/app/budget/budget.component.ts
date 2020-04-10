@@ -76,4 +76,8 @@ export class BudgetComponent implements OnInit {
       next: (data) => (this.incomeList = data)
     });
   }
+
+  updateBalance() {
+    this.calendar.updateDailyTotals();
+  }
 }

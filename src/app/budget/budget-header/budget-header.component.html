@@ -1,6 +1,12 @@
-<div class="d-flex">
-  <div class="w-50"></div>
-  <div class="d-flex flex-row justify-content-around align-items-center w-50">
+<div class="bordered">
+  <div class="d-flex flex-row align-items-center">
+    <div class=" ml-5 mr-auto">
+      <mat-form-field class="m-2">
+        <mat-label>Starting balance</mat-label>
+        <input matInput type="number" (ngModelChange)="updateStartingBalance()" [(ngModel)]="startingBalance"/>
+        <span matPrefix>$&nbsp;</span>
+      </mat-form-field>
+    </div>
     <div class="chart-wrapper mt-3">
       <canvas baseChart class="chart"
         [datasets]="barChartData"
@@ -11,7 +17,7 @@
         [chartType]="barChartType">
       </canvas>
     </div>
-    <div>
+    <div class="mr-5 ml-auto">
       <h3>Balance
       </h3>
       <h1>

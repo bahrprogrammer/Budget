@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IBudgetItem } from '../../models/interfaces';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-budget-item-list',
@@ -49,8 +49,8 @@ export class BudgetItemListComponent implements OnInit {
   initializeFormGroup() {
     this.itemForm = this.builder.group({
       date: '',
-      source: '',
-      amount: ''
+      source: ['', [Validators.required, Validators.minLength(3)]],
+      amount: ['', [Validators.required, Validators.min(0)]],
     });
   }
 }
