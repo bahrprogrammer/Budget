@@ -48,7 +48,7 @@ export class BudgetItemListComponent implements OnInit {
 
   initializeFormGroup() {
     this.itemForm = this.builder.group({
-      date: '',
+      date: ['', Validators.required],
       source: ['', [Validators.required, Validators.minLength(3)]],
       amount: ['', [Validators.required, Validators.min(0)]],
     });
