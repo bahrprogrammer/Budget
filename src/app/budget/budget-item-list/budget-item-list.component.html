@@ -1,5 +1,5 @@
 <h3 class="mt-3">{{listTitle}}</h3>
-<form (ngSubmit)="add()" [formGroup]="itemForm">
+<form (ngSubmit)="add(itemForm, formDirective)" #formDirective="ngForm" [formGroup]="itemForm">
   <div class="d-flex flex-wrap justify-content-center">
     <div class="d-flex justify-content-center">
       <mat-form-field class="m-2">

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IBudgetItem } from '../../models/interfaces';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-budget-item-list',
@@ -36,10 +36,12 @@ export class BudgetItemListComponent implements OnInit {
   }
 
 
-  add() {
+  add(formData: any, formDirective: FormGroupDirective) {
     const item: IBudgetItem = this.itemForm.value;
     this.addItem.emit(item);
-    this.initializeFormGroup();
+    formDirective.resetForm();
+    this.itemForm.reset();
+    
   }
 
   remove(item: IBudgetItem) {
