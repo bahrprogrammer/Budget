@@ -41,7 +41,6 @@ export class BudgetItemListComponent implements OnInit {
     this.addItem.emit(item);
     formDirective.resetForm();
     this.itemForm.reset();
-    
   }
 
   remove(item: IBudgetItem) {
