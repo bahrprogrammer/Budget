@@ -1,9 +1,8 @@
 import { BudgetService } from './budget.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { IBudgetItem } from '../models/interfaces';
+import { IBudgetItem, IDay } from '../models/interfaces';
 import { BudgetHeaderComponent } from './budget-header/budget-header.component';
-import { BudgetCalendarComponent } from './budget-calendar/budget-calendar.component';
 
 @Component({
   selector: 'app-budget',
@@ -14,11 +13,10 @@ export class BudgetComponent implements OnInit {
   @ViewChild(BudgetHeaderComponent)
   private header: BudgetHeaderComponent;
 
-  @ViewChild(BudgetCalendarComponent)
-  private calendar: BudgetCalendarComponent;
-
   incomeList: IBudgetItem[] = [];
   expenseList: IBudgetItem[] = [];
+  currentMonth: IDay[][] = [];
+  currentMonthDisplay = 'Current Month';
 
   get expenseTotal(): number {
     let total = 0;
@@ -41,15 +39,15 @@ export class BudgetComponent implements OnInit {
   ngOnInit() {
     this.getExpenseItems();
     this.getIncomeItems();
+    this.getCurrentMonth();
+    this.getCurrentMonthDisplay();
   }
 
   add(item: IBudgetItem, list: string) {
     if (list === 'expenses') {
       this.service.addExpenseItem(item);
-      this.calendar.addExpenseToCalendar(item);
     } else if (list === 'income') {
       this.service.addIncomeItem(item);
-      this.calendar.addIncomeToCalendar(item);
     }
     this.header.updateChart();
   }
@@ -57,10 +55,8 @@ export class BudgetComponent implements OnInit {
   removeItem(item: IBudgetItem, list: string) {
     if (list === 'expenses') {
       this.service.removeExpenseItem(item);
-      this.calendar.removeExpenseFromCalendar(item);
     } else if (list === 'income') {
       this.service.removeIncomeItem(item);
-      this.calendar.removeIncomeFromCalendar(item);
     }
     this.header.updateChart();
   }
@@ -77,7 +73,20 @@ export class BudgetComponent implements OnInit {
     });
   }
 
-  updateBalance() {
-    this.calendar.updateDailyTotals();
+  getCurrentMonth() {
+    this.service.getCurrentCalendarMonth().subscribe({
+      next: (data) => (this.currentMonth = data)
+    });
+  }
+
+  getCurrentMonthDisplay() {
+    this.service.getMonthDisplay().subscribe({
+      next: (data) => (this.currentMonthDisplay = data)
+    });
+  }
+
+  updateStartingBalance(startingBalance: number) {
+    this.service.startingBalance = startingBalance;
+    this.service.updateDailyTotals();
   }
 }
