@@ -96,13 +96,11 @@ export class BudgetHeaderComponent implements OnInit {
           ]
         }
       ];
-    }, 500);
+    }, 100);
     this.chart.chart.update();
   }
 
   updateStartingBalance() {
-    setTimeout(() => {
-      this.update.emit(this.startingBalance);
-    }, 250);
+    this.update.emit(this.startingBalance);
   }
 }
