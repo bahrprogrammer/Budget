@@ -15,14 +15,17 @@ export class BudgetHeaderComponent implements OnInit {
   @Input()
   expenseTotal = 0;
 
+  @Input()
+  currentMonthDisplay;
+
+  @Input()
+  startingBalance = 0;
 
   @Output()
   update = new EventEmitter();
 
   @ViewChild(BaseChartDirective)
   public chart: BaseChartDirective;
-
-  startingBalance = 0;
 
   get badgeClass(): string {
     const percent = (this.expenseTotal / (this.incomeTotal + this.startingBalance));

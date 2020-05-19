@@ -1,2 +1,16 @@
 @import "../../variables.scss";
 
+@media print {
+  .d-print-none {
+    display: none !important;
+  }
+
+  .d-print-table {
+    display: table !important;
+  }
+
+  .col-print-12 {
+    width: 100%;
+    margin: auto;
+  }
+}

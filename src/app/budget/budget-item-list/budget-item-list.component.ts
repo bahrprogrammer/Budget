@@ -24,7 +24,7 @@ export class BudgetItemListComponent implements OnInit {
 
   newItem: IBudgetItem = {
     id: null,
-    date: null,
+    date: new Date(),
     source: null,
     amount: null
   };

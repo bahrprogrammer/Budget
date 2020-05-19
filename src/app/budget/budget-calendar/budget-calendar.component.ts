@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { IDay, IBudgetItem } from '../../models/interfaces';
+import { Calendar } from 'src/app/models/calendar';
 
 @Component({
   selector: 'app-budget-calendar',
@@ -9,12 +10,16 @@ import { IDay, IBudgetItem } from '../../models/interfaces';
 })
 export class BudgetCalendarComponent implements OnInit {
   @Input()
-  calendarWeeks: IDay[][];
+  calendar: Calendar;
 
-  @Input()
-  monthYearDisplay = '';
+  @Output()
+  switchMonth = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void { }
+
+  switchMonthView(month: string): void {
+    this.switchMonth.emit(month);
+  }
 }
