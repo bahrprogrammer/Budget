@@ -2,12 +2,18 @@
   <div class="d-flex flex-row align-items-center">
     <div class="ml-5 mr-auto">
       <h3>Starting balance</h3>
-      <div class="input-group input-group-sm col-10">
+      <div *ngIf="currentMonth" class="input-group input-group-sm col-10">
         <div class="input-group-prepend">
           <span class="input-group-text">$</span>
         </div>
-        <input type="number" class="form-control" id="startingBalance" aria-label="Amount" (keyup)="updateStartingBalance()" [(ngModel)]="startingBalance">
+        <input type="number"
+               class="form-control"
+               id="startingBalance"
+               aria-label="Amount"
+               (keyup)="updateStartingBalance()"
+               [(ngModel)]="startingBalance">
       </div>
+      <h5 *ngIf="!currentMonth" class="text-left">{{startingBalance | currency}}</h5>
     </div>
     <div class="chart-wrapper mt-3">
       <h2 class="text-center">{{currentMonthDisplay}}</h2>

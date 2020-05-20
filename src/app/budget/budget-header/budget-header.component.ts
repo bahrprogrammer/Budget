@@ -10,13 +10,16 @@ import { Label, BaseChartDirective } from 'ng2-charts';
 })
 export class BudgetHeaderComponent implements OnInit {
   @Input()
+  currentMonth;
+
+  @Input()
+  currentMonthDisplay;
+
+  @Input()
   incomeTotal = 0;
 
   @Input()
   expenseTotal = 0;
-
-  @Input()
-  currentMonthDisplay;
 
   @Input()
   startingBalance = 0;
