@@ -15,7 +15,7 @@ export class Calendar {
   incomeTotal: number;
 
   get remainder(): number {
-    const starting = this.startingBalance ? this.startingBalance : 0;
+    const starting = this.startingBalance;
     return this.incomeTotal + starting - this.expenseTotal;
   }
 
