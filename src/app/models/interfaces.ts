@@ -5,3 +5,9 @@ export interface IBudgetItem {
   amount: number;
 }
 
+export interface IDay {
+  day: number;
+  dailyExpenses: IBudgetItem[];
+  dailyIncome: IBudgetItem[];
+  dailyTotal: number;
+}

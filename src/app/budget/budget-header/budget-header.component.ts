@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, BaseChartDirective } from 'ng2-charts';
@@ -10,16 +10,28 @@ import { Label, BaseChartDirective } from 'ng2-charts';
 })
 export class BudgetHeaderComponent implements OnInit {
   @Input()
-  incomeTotal: number = 0;
+  currentMonth;
 
   @Input()
-  expenseTotal: number = 0;
+  currentMonthDisplay;
+
+  @Input()
+  incomeTotal = 0;
+
+  @Input()
+  expenseTotal = 0;
+
+  @Input()
+  startingBalance = 0;
+
+  @Output()
+  update = new EventEmitter();
 
   @ViewChild(BaseChartDirective)
   public chart: BaseChartDirective;
 
   get badgeClass(): string {
-    const percent = (this.expenseTotal / this.incomeTotal);
+    const percent = (this.expenseTotal / (this.incomeTotal + this.startingBalance));
     const highRisk = .85;
     const mediumRisk = .5;
 
@@ -59,7 +71,8 @@ export class BudgetHeaderComponent implements OnInit {
   barChartData: ChartDataSets[] = [];
 
   get remainder(): number {
-    return this.incomeTotal - this.expenseTotal;
+    const starting = this.startingBalance ? this.startingBalance : 0;
+    return this.incomeTotal + starting - this.expenseTotal;
   }
 
   constructor() { }
@@ -89,11 +102,11 @@ export class BudgetHeaderComponent implements OnInit {
           ]
         }
       ];
-    }, 500);
+    }, 100);
     this.chart.chart.update();
   }
 
-  updateBadge() {
-
+  updateStartingBalance() {
+    this.update.emit(this.startingBalance);
   }
 }

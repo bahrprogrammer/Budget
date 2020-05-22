@@ -1,8 +1,9 @@
 import { BudgetService } from './budget.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { IBudgetItem } from '../models/interfaces';
+import { IBudgetItem, IDay } from '../models/interfaces';
 import { BudgetHeaderComponent } from './budget-header/budget-header.component';
+import { Calendar } from '../models/calendar';
 
 @Component({
   selector: 'app-budget',
@@ -11,61 +12,56 @@ import { BudgetHeaderComponent } from './budget-header/budget-header.component';
 })
 export class BudgetComponent implements OnInit {
   @ViewChild(BudgetHeaderComponent)
-  private budgetHeaderComponent: BudgetHeaderComponent;
+  private header: BudgetHeaderComponent;
 
-  incomeList: IBudgetItem[] = [];
-  expenseList: IBudgetItem[] = [];
-
-  get expenseTotal(): number {
-    let total = 0;
-    for (const exp of this.expenseList) {
-      total += exp.amount;
-    }
-    return total;
-  }
-
-  get incomeTotal(): number {
-    let total = 0;
-    for (const inc of this.incomeList) {
-      total += inc.amount;
-    }
-    return total;
-  }
+  activeMonth: Calendar;
 
   constructor(private service: BudgetService) { }
 
   ngOnInit() {
-    this.getExpenseItems();
-    this.getIncomeItems();
+    this.getCurrentMonth();
   }
 
   add(item: IBudgetItem, list: string) {
     if (list === 'expenses') {
-      this.service.addExpenseItem(item);
+      this.activeMonth.addExpenseToCalendar(item);
     } else if (list === 'income') {
-      this.service.addIncomeItem(item);
+      this.activeMonth.addIncomeToCalendar(item);
     }
-    this.budgetHeaderComponent.updateChart();
+    this.getCurrentMonth();
+    this.header.updateChart();
   }
 
   removeItem(item: IBudgetItem, list: string) {
     if (list === 'expenses') {
-      this.service.removeExpenseItem(item);
+      this.activeMonth.removeExpenseFromCalendar(item);
     } else if (list === 'income') {
-      this.service.removeIncomeItem(item);
+      this.activeMonth.removeIncomeFromCalendar(item);
     }
-    this.budgetHeaderComponent.updateChart();
+    this.header.updateChart();
   }
 
-  getExpenseItems() {
-    this.service.getExpenseItems().subscribe({
-      next: (data) => (this.expenseList = data)
+  getCurrentMonth() {
+    this.service.getCurrentCalendarMonth().subscribe({
+      next: (data) => (this.activeMonth = data)
     });
   }
 
-  getIncomeItems() {
-    this.service.getIncomeItems().subscribe({
-      next: (data) => (this.incomeList = data)
+  getNextMonth() {
+    this.service.getNextCalendarMonth().subscribe({
+      next: (data) => (this.activeMonth = data)
     });
+  }
+
+  switchMonthView(month: string) {
+    if (month === 'next') {
+      this.getNextMonth();
+    } else if (month === 'previous') {
+      this.getCurrentMonth();
+    }
+  }
+
+  updateStartingBalance(startingBalance: number) {
+    this.service.updateStartingBalance(startingBalance);
   }
 }

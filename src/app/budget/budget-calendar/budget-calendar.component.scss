@@ -1,0 +1,55 @@
+@import "../../../variables.scss";
+
+#calendar {
+  padding: 1em;
+}
+
+.day-cell {
+  min-width: 5em;
+  vertical-align: bottom;
+}
+
+.calendar-item {
+  font-weight: 550;
+}
+
+.balance {
+  font-weight: 550;
+}
+
+.badge-dark {
+  background: $border;
+}
+
+.table tbody tr, .table tbody td {
+  height: 6em;
+  max-width: 7em;
+}
+
+.table-bordered tbody tr {
+  border: 2px solid $border;
+}
+
+.table-bordered tbody tr td {
+  border: 2px solid $border;
+}
+
+.table-bordered thead tr {
+  border: 2px solid $border;
+  background: $background-emphasis;
+}
+
+.table-bordered thead tr th {
+  border: 2px solid $border;
+}
+
+.table-bordered {
+  border: 2px solid $border;
+}
+
+@media print {
+  .table tbody tr, .table tbody td {
+    height: 6em;
+    max-width: 10em;
+  }
+}
