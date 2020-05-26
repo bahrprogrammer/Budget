@@ -42,23 +42,31 @@
             <td *ngFor="let d of row" class="day-cell text-truncate">
               <div *ngIf="d" class="d-flex h-100">
                 <div class="align-self-start text-left w-25">
-                  <span class="badge badge-pill badge-dark">{{d.day}}</span>
+                  <span class="badge badge-pill badge-dark mr-1">{{d.day}}</span>
                 </div>
-                <div class="d-flex flex-column flex-fill h-100">
-                  <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0 text-right">
+                <div class="d-flex flex-column flex-fill text-truncate h-100">
+                  <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0">
                     <li *ngFor="let item of d.dailyIncome" class="calendar-item text-right text-truncate">
                       <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{item.source}}: {{item.amount | currency}}">{{item.source}}: {{item.amount | currency}}</small>
                     </li>
-                    <hr *ngIf="d.dailyExpenses.length > 0">
+                    <hr class="p-0 m-0" *ngIf="d.dailyExpenses.length > 0">
                   </ul>
-                  <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0 text-right">
+                  <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0">
                     <li *ngFor="let item of d.dailyExpenses" class="calendar-item text-right text-truncate">
                       <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{item.source}}: -{{item.amount | currency}}">{{item.source}}: -{{item.amount | currency}}</small>
                     </li>
                   </ul>
                   <div class="mt-auto ml-auto">
-                    <hr *ngIf="d.dailyIncome.length > 0 || d.dailyExpenses.length > 0">
-                    <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="Balance: {{d.dailyTotal | currency}}" class="badge badge-pill badge-success calendar-item text-right">{{d.dailyTotal | currency}}</small>
+                    <hr class="p-0 m-0" *ngIf="d.dailyIncome.length > 0 || d.dailyExpenses.length > 0">
+                    <small class="font-weight-bold"
+                           data-toggle="tooltip"
+                           data-placement="top"
+                           title="Balance: {{d.dailyTotal | currency}}"
+                           class="badge badge-pill badge-danger calendar-item text-right"
+                           [ngClass]="{'badge-success': d.dailyTotal > dangerLimit,
+                                        'badge-danger': d.dailyTotal <= dangerLimit}">
+                      {{d.dailyTotal | currency}}
+                    </small>
                   </div>
                 </div>
               </div>

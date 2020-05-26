@@ -15,6 +15,8 @@ export class BudgetCalendarComponent implements OnInit {
   @Output()
   switchMonth = new EventEmitter<string>();
 
+  dangerLimit = 100;
+
   constructor() { }
 
   ngOnInit(): void { }
