@@ -1,13 +1,11 @@
 <div class="container-flex text-center">
-  <div class="container">
-    <app-budget-header #header
-                      [expenseTotal]="activeMonth.expenseTotal"
-                      [incomeTotal]="activeMonth.incomeTotal"
-                      [startingBalance]="activeMonth.startingBalance"
-                      [currentMonth]="activeMonth.currentMonth"
-                      [currentMonthDisplay]="activeMonth.currentMonthDisplay"
-                      (update)="updateStartingBalance($event)"></app-budget-header>
-  </div>
+  <app-budget-header #header
+                    [expenseTotal]="activeMonth.expenseTotal"
+                    [incomeTotal]="activeMonth.incomeTotal"
+                    [startingBalance]="activeMonth.startingBalance"
+                    [currentMonth]="activeMonth.currentMonth"
+                    [currentMonthDisplay]="activeMonth.currentMonthDisplay"
+                    (update)="updateStartingBalance($event)"></app-budget-header>
   <div class="row w-100">
     <div class="col-12 col-xl-4 d-print-none">
       <div class="row">
