@@ -1,16 +1,22 @@
 <div class="card mx-2">
-  <div class="card-body">
-    <div class="d-flex flex-row align-content-start ml-3">
-      <div class="d-flex flex-column align-content-start w-75">
-        <div class="mt-1 text-left">{{item.date | date}}</div>
-        <div class="d-flex flex-row">
-          <div class="w-50 mt-1 text-left">{{item.source}}</div>
-          <div class="w-50 mt-1 text-right">{{item.amount | currency}}</div>
+  <div class="card-body p-0">
+    <div class="d-flex flex-row justify-content-md-between align-content-start ml-3">
+      <div class="d-flex
+                  flex-column
+                  flex-md-row
+                  justify-content-md-between
+                  align-content-start
+                  flex-fill
+                  pt-1">
+        <div class="text-left">{{item.date | date}}</div>
+        <div class="d-flex flex-row justify-content-around ml-md-3 flex-fill">
+          <div class="text-left">{{item.source}}</div>
+          <div class="text-right">{{item.amount | currency}}</div>
         </div>
       </div>
-      <div class="d-flex flex-row-reverse align-content-end flex-fill">
+      <div class="d-flex flex-row-reversed">
         <button type="button"
-                class="btn btn-default btn-lg text-danger font-weight-bold"
+                class="btn btn-default btn-lg text-danger font-weight-bold py-0"
                 data-toggle="tooltip"
                 title="Remove item"
                 (click)="remove()">

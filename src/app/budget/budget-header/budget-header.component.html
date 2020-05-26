@@ -1,6 +1,7 @@
 <div class="bordered">
-  <div class="d-flex flex-row align-items-center">
-    <div class="ml-5 mr-auto">
+  <h1 class="d-block d-md-none text-center my-1">{{currentMonthDisplay}}</h1>
+  <div class="d-flex flex-column flex-md-row align-items-center">
+    <div class="ml-md-5 mr-md-auto">
       <h3>Starting balance</h3>
       <div *ngIf="currentMonth" class="input-group input-group-sm col-10">
         <div class="input-group-prepend">
@@ -16,7 +17,7 @@
       <h5 *ngIf="!currentMonth" class="text-left">{{startingBalance | currency}}</h5>
     </div>
     <div class="chart-wrapper mt-3">
-      <h2 class="text-center">{{currentMonthDisplay}}</h2>
+      <h2 class="d-none d-md-block text-center">{{currentMonthDisplay}}</h2>
       <canvas baseChart class="chart"
         [datasets]="barChartData"
         [labels]="barChartLabels"
@@ -26,7 +27,7 @@
         [chartType]="barChartType">
       </canvas>
     </div>
-    <div class="mr-5 ml-auto">
+    <div class="mr-md-5 ml-md-auto">
       <h3 class="text-right">Balance</h3>
       <h1>
         <span [ngClass]="badgeClass">
