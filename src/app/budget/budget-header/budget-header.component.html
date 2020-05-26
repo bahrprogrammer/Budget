@@ -16,7 +16,7 @@
       </div>
       <h5 *ngIf="!currentMonth" class="text-left">{{startingBalance | currency}}</h5>
     </div>
-    <div class="chart-wrapper mt-3">
+    <div *ngIf="incomeTotal > 0 || expenseTotal > 0" class="chart-wrapper mt-3">
       <h2 class="d-none d-md-block text-center">{{currentMonthDisplay}}</h2>
       <canvas baseChart class="chart"
         [datasets]="barChartData"
