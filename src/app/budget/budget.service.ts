@@ -68,6 +68,7 @@ export class BudgetService {
   getNextCalendarMonth(): Observable<Calendar> {
     this.nextMonth.startingBalance = this.currentMonth.remainder;
     this.nextMonth.updateDailyTotals();
+
     return of(this.nextMonth);
   }
 }
