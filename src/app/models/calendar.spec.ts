@@ -18,6 +18,41 @@ describe('Calendar', () => {
   });
 });
 
+describe('Calendar addExpenseToCalendar', () => {
+  let calendar: Calendar;
+  const date = new Date('1/2/2020');
+
+  beforeEach(() => {
+    calendar = new Calendar(date);
+  });
+
+  it('should add the item to the incomeList', () => {
+    const expenseItem: IBudgetItem = {
+      id: 1,
+      date: new Date('1/5/2020'),
+      source: 'test expense',
+      amount: 500
+    };
+
+    calendar.addExpenseToCalendar(expenseItem);
+
+    expect(calendar.expenseList.length).toEqual(1);
+  });
+
+  it('should add the amount to the incomeTotal', () => {
+    const expenseItem: IBudgetItem = {
+      id: 1,
+      date: new Date('1/5/2020'),
+      source: 'test expense',
+      amount: 500
+    };
+
+    calendar.addExpenseToCalendar(expenseItem);
+
+    expect(calendar.expenseTotal).toEqual(500);
+  });
+});
+
 describe('Calendar addIncomeToCalendar', () => {
   let calendar: Calendar;
   const date = new Date('1/2/2020');
