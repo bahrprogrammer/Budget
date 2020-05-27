@@ -2,7 +2,7 @@ import { BudgetService } from './budget.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
-import { IBudgetItem, IDay } from '../models/interfaces';
+import { IBudgetItem } from '../models/interfaces';
 import { BudgetHeaderComponent } from './budget-header/budget-header.component';
 import { Calendar } from '../models/calendar';
 

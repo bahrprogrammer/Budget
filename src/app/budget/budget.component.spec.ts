@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BudgetComponent } from './budget.component';
+
 
 describe('BudgetComponent', () => {
   let component: BudgetComponent;
@@ -8,7 +10,9 @@ describe('BudgetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BudgetComponent ]
+      imports: [ ReactiveFormsModule ],
+      declarations: [ BudgetComponent ],
+      providers: [ FormBuilder ]
     })
     .compileComponents();
   }));
