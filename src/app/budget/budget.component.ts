@@ -34,35 +34,18 @@ export class BudgetComponent implements OnInit {
 
     formDirective.resetForm();
     this.expenseForm.reset();
-
-    this.getCurrentMonth();
     this.header.updateChart();
   }
 
   addIncome(formDirective: FormGroupDirective) {
-    const invalidControls = this.findInvalidControls();
-
     const item: IBudgetItem = this.incomeForm.value;
 
     this.activeMonth.addIncomeToCalendar(item);
 
     formDirective.resetForm();
     this.incomeForm.reset();
-
-    this.getCurrentMonth();
     this.header.updateChart();
   }
-
-  public findInvalidControls() {
-    const invalid = [];
-    const controls = this.incomeForm.controls;
-    for (const name in controls) {
-        if (controls[name].invalid) {
-            invalid.push(name);
-        }
-    }
-    return invalid;
-}
 
   removeItem(item: IBudgetItem, list: string) {
     if (list === 'expenses') {
