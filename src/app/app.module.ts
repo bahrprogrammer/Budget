@@ -7,20 +7,20 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AboutComponent } from './about/about.component';
 import { BudgetModule } from './budget/budget.module';
-import { ContactComponent } from './contact/contact.component';
+import { ContactModule } from './contact/contact.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    AboutComponent,
-    ContactComponent
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BudgetModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ContactModule
   ],
   providers: [],
   bootstrap: [AppComponent]
