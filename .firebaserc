@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "freebudgetcalendar": {
+      "hosting": {
+        "budget-app": [
+          "freebudgetcalendar"
+        ]
+      }
+    }
+  }
+}
