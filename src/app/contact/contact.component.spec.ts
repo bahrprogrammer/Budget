@@ -1,24 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
-import { BudgetComponent } from './budget.component';
+import { ContactComponent } from './contact.component';
 
 
-describe('BudgetComponent', () => {
-  let component: BudgetComponent;
-  let fixture: ComponentFixture<BudgetComponent>;
+describe('ContactComponent', () => {
+  let component: ContactComponent;
+  let fixture: ComponentFixture<ContactComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule ],
-      declarations: [ BudgetComponent ],
+      declarations: [ ContactComponent ],
       providers: [ FormBuilder ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BudgetComponent);
+    fixture = TestBed.createComponent(ContactComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

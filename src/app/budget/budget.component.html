@@ -10,16 +10,90 @@
     <div class="col-12 col-xl-4 d-print-none">
       <div class="row">
         <div class="col-12 col-md-6 col-xl-12">
-          <app-budget-item-list [(items)]="activeMonth.incomeList"
-                                [listTitle]="'Income'"
-                                (addItem)="add($event, 'income')"
-                                (removeItem)="removeItem($event, 'income')"></app-budget-item-list>
+          <h3 class="mt-3">Income</h3>
+          <form (ngSubmit)="addIncome(formDirective)" #formDirective="ngForm" [formGroup]="incomeForm">
+            <div class="form-group">
+              <span class="text-center font"><u>(Add income items here)</u></span>
+              <div class="row mx-2 justify-content-center">
+                <div class="col-8 col-sm-4 p-1">
+                  <label for="date">Date</label>
+                  <input type="date"
+                          class="form-control form-control-sm border-dark"
+                          formControlName="date"
+                          id="date"
+                          required>
+                </div>
+                <div class="col-8 col-sm-3 p-1">
+                  <label for="source">Source</label>
+                  <input type="text"
+                          class="form-control form-control-sm border-dark"
+                          formControlName="source"
+                          id="source"
+                          required>
+                </div>
+                <div class="col-8 col-sm-3 p-1">
+                  <label for="amount">Amount</label>
+                  <input type="number"
+                          class="form-control form-control-sm border-dark"
+                          formControlName="amount"
+                          id="amount"
+                          placeholder="$0.00"
+                          min="0"
+                          required>
+                </div>
+
+                <div class="col-12 col-sm-2 mt-3">
+                  <button type="submit" [disabled]="!incomeForm.valid" class="btn btn-success btn-sm mt-3">Add</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div *ngFor="let item of activeMonth.incomeList" class="d-flex flex-column justify-content-center">
+            <app-budget-item [item]="item" (removeItem)="removeItem($event, 'income')"></app-budget-item>
+          </div>
         </div>
         <div class="col-12 col-md-6 col-xl-12">
-          <app-budget-item-list [(items)]="activeMonth.expenseList"
-                                [listTitle]="'Expenses'"
-                                (addItem)="add($event, 'expenses')"
-                                (removeItem)="removeItem($event, 'expenses')"></app-budget-item-list>
+          <h3 class="mt-3">Expenses</h3>
+          <form (ngSubmit)="addExpense(formDirective)" #formDirective="ngForm" [formGroup]="expenseForm">
+            <div class="form-group">
+              <span class="text-center font"><u>(Add expenses here)</u></span>
+              <div class="row mx-2 justify-content-center">
+                <div class="col-8 col-sm-4 p-1">
+                  <label for="expenseDate">Date</label>
+                  <input type="date"
+                          class="form-control form-control-sm border-dark"
+                          formControlName="date"
+                          id="expenseDate"
+                          required>
+                </div>
+                <div class="col-8 col-sm-3 p-1">
+                  <label for="expenseSource">Payee</label>
+                  <input type="text"
+                          class="form-control form-control-sm border-dark"
+                          formControlName="source"
+                          id="expenseSource"
+                          required>
+                </div>
+                <div class="col-8 col-sm-3 p-1">
+                  <label for="amount">Amount</label>
+                  <input type="number"
+                          class="form-control form-control-sm border-dark"
+                          formControlName="amount"
+                          id="expenseAmount"
+                          placeholder="$0.00"
+                          min="0"
+                          required>
+                </div>
+                <div class="col-12 col-sm-2 mt-3">
+                  <button type="submit" [disabled]="!expenseForm.valid" class="btn btn-success btn-sm mt-3">Add</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div *ngFor="let item of activeMonth.expenseList" class="d-flex flex-column justify-content-center">
+            <app-budget-item [item]="item" (removeItem)="removeItem($event, 'expenses')"></app-budget-item>
+          </div>
+
         </div>
       </div>
     </div>
