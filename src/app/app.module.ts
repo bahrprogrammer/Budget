@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AboutComponent } from './about/about.component';
 import { BudgetModule } from './budget/budget.module';
-import { ContactModule } from './contact/contact.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import { ContactModule } from './contact/contact.module';
     BrowserModule,
     AppRoutingModule,
     BudgetModule,
-    BrowserAnimationsModule,
-    ContactModule
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
