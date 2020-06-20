@@ -65,12 +65,8 @@ export class BudgetService {
   private getLocalStorage() {
     const localStorageAvailable = this.storageAvailable('localStorage');
 
-    window.alert('cache test');
-
     if (localStorageAvailable) {
       const cache = this.storage.cachedMonths;
-
-      window.alert(cache);
 
       if (cache) {
         const cachedMonths: any = JSON.parse(cache);
