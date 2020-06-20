@@ -68,6 +68,9 @@ export class BudgetService {
     if (localStorageAvailable) {
       const cache = this.storage.cachedMonths;
 
+      console.log('get:');
+      console.log(cache);
+
       if (cache) {
         const cachedMonths: any = JSON.parse(cache);
         if (this.currentMonth.month === cachedMonths.nextMonth.month) {
