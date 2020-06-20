@@ -1,5 +1,5 @@
 import { BudgetService } from './budget.service';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
 import { IBudgetItem } from '../models/interfaces';
@@ -11,7 +11,7 @@ import { Calendar } from '../models/calendar';
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.scss']
 })
-export class BudgetComponent implements OnInit, OnDestroy {
+export class BudgetComponent implements OnInit {
   @ViewChild(BudgetHeaderComponent)
   private header: BudgetHeaderComponent;
 
@@ -25,11 +25,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
     this.initializeIncomeFormGroup();
     this.initializeExpenseFormGroup();
     this.getCurrentMonth();
-  }
-
-  ngOnDestroy() {
-    console.log('on destroy');
-    this.service.addToLocalStorage();
   }
 
   addExpense(formDirective: FormGroupDirective) {
