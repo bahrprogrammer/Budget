@@ -232,3 +232,4 @@ export class Calendar {
     this.incomeTotal = total;
   }
 }
+

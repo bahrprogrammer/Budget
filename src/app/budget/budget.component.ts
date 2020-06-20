@@ -1,5 +1,5 @@
 import { BudgetService } from './budget.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 
 import { IBudgetItem } from '../models/interfaces';
@@ -11,7 +11,7 @@ import { Calendar } from '../models/calendar';
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.scss']
 })
-export class BudgetComponent implements OnInit {
+export class BudgetComponent implements OnInit, OnDestroy {
   @ViewChild(BudgetHeaderComponent)
   private header: BudgetHeaderComponent;
 
@@ -27,6 +27,11 @@ export class BudgetComponent implements OnInit {
     this.getCurrentMonth();
   }
 
+  ngOnDestroy() {
+    console.log('on destroy');
+    this.service.addToLocalStorage();
+  }
+
   addExpense(formDirective: FormGroupDirective) {
     const item: IBudgetItem = this.expenseForm.value;
 
@@ -34,6 +39,9 @@ export class BudgetComponent implements OnInit {
 
     formDirective.resetForm();
     this.expenseForm.reset();
+
+    this.service.addToLocalStorage();
+
     this.header.updateChart();
   }
 
@@ -44,6 +52,9 @@ export class BudgetComponent implements OnInit {
 
     formDirective.resetForm();
     this.incomeForm.reset();
+
+    this.service.addToLocalStorage();
+
     this.header.updateChart();
   }
 
@@ -53,6 +64,9 @@ export class BudgetComponent implements OnInit {
     } else if (list === 'income') {
       this.activeMonth.removeIncomeFromCalendar(item);
     }
+
+    this.service.addToLocalStorage();
+
     this.header.updateChart();
   }
 
@@ -87,6 +101,7 @@ export class BudgetComponent implements OnInit {
       amount: ['', [Validators.required, Validators.min(0)]]
     });
   }
+
   initializeExpenseFormGroup() {
     this.expenseForm = this.builder.group({
       date: ['', Validators.required],

@@ -23,6 +23,7 @@
     "bootstrap-icons": "^1.0.0-alpha3",
     "chart.js": "^2.9.3",
     "ng2-charts": "^2.3.0",
+    "ngx-webstorage-service": "^4.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.11.1",
     "zone.js": "~0.10.2"
