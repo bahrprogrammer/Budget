@@ -91,19 +91,21 @@ export class BudgetHeaderComponent implements OnInit {
   }
 
   updateChart() {
-    setTimeout(() => {
-      this.barChartData = [
-        {
-          data: [this.expenseTotal, this.incomeTotal],
-          label: 'Budget totals',
-          backgroundColor: [
-            'rgba(204, 0, 0)',
-            'rgba(0, 153, 0)'
-          ]
-        }
-      ];
-    }, 100);
-    this.chart.chart.update();
+    if (this.chart) {
+      setTimeout(() => {
+        this.barChartData = [
+          {
+            data: [this.expenseTotal, this.incomeTotal],
+            label: 'Budget totals',
+            backgroundColor: [
+              'rgba(204, 0, 0)',
+              'rgba(0, 153, 0)'
+            ]
+          }
+        ];
+      }, 100);
+      this.chart.chart.update();
+    }
   }
 
   updateStartingBalance() {

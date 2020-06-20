@@ -88,6 +88,8 @@ export class BudgetComponent implements OnInit, OnDestroy {
     } else if (month === 'previous') {
       this.getCurrentMonth();
     }
+    this.initializeExpenseFormGroup();
+    this.initializeIncomeFormGroup();
   }
 
   updateStartingBalance(startingBalance: number) {

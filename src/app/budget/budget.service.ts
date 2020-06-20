@@ -5,18 +5,18 @@ import { Observable, of } from 'rxjs';
 import { Calendar } from '../models/calendar';
 import { IBudgetItem } from '../models/interfaces';
 
-const STORAGE_KEY = 'budget-calendar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BudgetService {
   storage = window.localStorage;
+  storageKey = 'budget-calendar';
+
   currentMonth: Calendar;
   nextMonth: Calendar;
 
   expenseList: IBudgetItem[] = [];
-
   incomeList: IBudgetItem[] = [];
 
   // @Inject(LOCAL_STORAGE) private storage: StorageService
@@ -32,28 +32,66 @@ export class BudgetService {
     this.updateStartingBalance(0);
 
     this.getLocalStorage();
-
-    // this.storage.clear();
   }
 
   addToLocalStorage() {
-    const budgetMonths: any = {
-      currentMonth: {
-        month: this.currentMonth.month,
-        income: this.currentMonth.incomeList,
-        expenses: this.currentMonth.expenseList
-      },
-      nextMonth: {
-        month: this.nextMonth.month,
-        income: this.nextMonth.incomeList,
-        expenses: this.nextMonth.expenseList
-      }
-    };
+    const localStorageAvailable = this.storageAvailable('localStorage');
+
+    if (localStorageAvailable) {
+      const cachedMonths: any = {
+        currentMonth: {
+          month: this.currentMonth.month,
+          income: this.cloneArray(this.currentMonth.incomeList),
+          expenses: this.cloneArray(this.currentMonth.expenseList),
+          startingBalance: this.currentMonth.startingBalance
+        },
+        nextMonth: {
+          month: this.nextMonth.month,
+          income: this.cloneArray(this.nextMonth.incomeList),
+          expenses: this.cloneArray(this.nextMonth.expenseList),
+          startingBalance: this.nextMonth.startingBalance
+        }
+      };
+
+      this.storage.cachedMonths = JSON.stringify(cachedMonths);
+    } else {
+      console.log(localStorageAvailable);
+    }
 
     console.log('set:');
-    console.log(budgetMonths);
+    console.log(this.storage.cachedMonths);
+  }
 
-    this.storage.setItem(STORAGE_KEY, JSON.stringify(budgetMonths));
+  private getLocalStorage() {
+    const localStorageAvailable = this.storageAvailable('localStorage');
+
+    if (localStorageAvailable) {
+      const cache = this.storage.cachedMonths;
+
+      console.log('get:');
+      console.log(cache);
+
+      if (cache) {
+        const cachedMonths: any = JSON.parse(cache);
+        if (this.currentMonth.month === cachedMonths.nextMonth.month) {
+          this.populateMonthFromCache(this.currentMonth, cachedMonths.nextMonth);
+
+          this.currentMonth.startingBalance = cachedMonths.nextMonth.startingBalance;
+        } else if (this.currentMonth.month === cachedMonths.currentMonth.month) {
+          this.populateMonthFromCache(this.currentMonth, cachedMonths.currentMonth);
+          this.populateMonthFromCache(this.nextMonth, cachedMonths.nextMonth);
+
+          this.currentMonth.startingBalance = cachedMonths.currentMonth.startingBalance;
+        }
+
+        this.currentMonth.currentMonth = true;
+        this.nextMonth.currentMonth = false;
+      }
+    } else {
+      console.log(localStorageAvailable);
+    }
+
+    this.currentMonth.updateDailyTotals();
   }
 
   private createCalendar(date: Date): Calendar {
@@ -74,79 +112,55 @@ export class BudgetService {
     return month;
   }
 
-  private clone(cloneObj: any): Calendar {
-    const date = new Date(`${cloneObj.month + 1}/1/${cloneObj.year}`);
-    const newCalendarMonth = new Calendar(date);
+  private cloneArray(arrayToClone: IBudgetItem[]): any[] {
+    const results = [];
 
-    if (cloneObj.expenseList.length > 0) {
-      cloneObj.expenseList.forEach(e => {
-        newCalendarMonth.addExpenseToCalendar(e);
-      });
-      newCalendarMonth.updateExpenseTotal();
-    }
+    arrayToClone.forEach((element: IBudgetItem) => {
+      const item = {
+        id: element.id,
+        amount: element.amount,
+        date: element.date.toString(),
+        source: element.source
+      };
+      results.push(item);
+    });
 
-    if (cloneObj.incomeList.length > 0) {
-      cloneObj.incomeList.forEach(i => {
-        newCalendarMonth.addIncomeToCalendar(i);
-      });
-      newCalendarMonth.updateIncomeTotal();
-    }
-
-    newCalendarMonth.updateDailyTotals();
-    return newCalendarMonth;
+    return results;
   }
 
-  private getLocalStorage() {
-    const cache = this.storage.getItem(STORAGE_KEY);
-
-    console.log('get:');
-    console.log(cache);
-
-    if (cache) {
-      const budgetMonths: any = JSON.parse(this.storage.getItem(STORAGE_KEY));
-      if (this.currentMonth.month === budgetMonths.nextMonth.month) {
-        if (budgetMonths.nextMonth.expenses.length > 0) {
-          budgetMonths.nextMonth.expenses.forEach((element: IBudgetItem) => {
-            this.currentMonth.addIncomeToCalendar(element);
-          });
-        }
-        if (budgetMonths.nextMonth.income.length > 0) {
-          budgetMonths.nextMonth.income.forEach((element: IBudgetItem) => {
-            this.currentMonth.addIncomeToCalendar(element);
-          });
-        }
-      } else if (this.currentMonth.month === budgetMonths.currentMonth.month) {
-        if (budgetMonths.currentMonth.expenses.length > 0) {
-          budgetMonths.currentMonth.expenses.forEach((element: IBudgetItem) => {
-            this.currentMonth.addIncomeToCalendar(element);
-          });
-        }
-        if (budgetMonths.currentMonth.income.length > 0) {
-          budgetMonths.currentMonth.income.forEach((element: IBudgetItem) => {
-            this.currentMonth.addIncomeToCalendar(element);
-          });
-        }
-        if (budgetMonths.nextMonth.expenses.length > 0) {
-          budgetMonths.nextMonth.expenses.forEach((element: IBudgetItem) => {
-            this.nextMonth.addIncomeToCalendar(element);
-          });
-        }
-        if (budgetMonths.nextMonth.income.length > 0) {
-          budgetMonths.nextMonth.income.forEach((element: IBudgetItem) => {
-            this.nextMonth.addIncomeToCalendar(element);
-          });
-        }
-      }
-
-      this.currentMonth.currentMonth = true;
-      this.nextMonth.currentMonth = false;
+  private populateMonthFromCache(month: Calendar, cache: any): void {
+    if (cache.expenses.length > 0) {
+      cache.expenses.forEach((element: IBudgetItem) => {
+        const item: IBudgetItem = {
+          id: element.id,
+          amount: element.amount,
+          date: new Date(element.date),
+          source: element.source
+        };
+        month.addExpenseToCalendar(item);
+      });
+    }
+    if (cache.income.length > 0) {
+      cache.income.forEach((element: IBudgetItem) => {
+        const item: IBudgetItem = {
+          id: element.id,
+          amount: element.amount,
+          date: new Date(element.date),
+          source: element.source
+        };
+        month.addIncomeToCalendar(item);
+      });
     }
   }
 
   updateStartingBalance(startingBalance: number) {
-    this.currentMonth.startingBalance = startingBalance;
-    this.currentMonth.updateDailyTotals();
-    this.nextMonth.startingBalance = this.currentMonth.remainder;
+    if (this.currentMonth.startingBalance !== startingBalance) {
+      this.currentMonth.startingBalance = startingBalance;
+      this.currentMonth.updateDailyTotals();
+      this.nextMonth.startingBalance = this.currentMonth.remainder;
+
+      this.addToLocalStorage();
+    }
   }
 
   getCurrentCalendarMonth(): Observable<Calendar> {
@@ -158,5 +172,26 @@ export class BudgetService {
     this.nextMonth.updateDailyTotals();
 
     return of(this.nextMonth);
+  }
+
+  storageAvailable(type: any): any {
+    let storage;
+
+    try {
+      storage = window[type];
+      const x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    } catch (e) {
+      return e instanceof DOMException && (
+        e.code === 22 ||
+        e.code === 1014 ||
+        e.name === 'QuotaExceededError' ||
+        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+        (storage && storage.length !== 0);
+    }
+
+    return true;
   }
 }
