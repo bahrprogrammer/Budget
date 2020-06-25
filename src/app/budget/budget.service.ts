@@ -34,6 +34,46 @@ export class BudgetService {
     this.getLocalStorage();
   }
 
+  getItemMonth(item: IBudgetItem) {
+    const monthString = (item.date.toString()).substr(5, 2);
+    const itemMonth = parseInt(monthString) - 1;
+
+    return itemMonth;
+  }
+
+  addExpense(item: IBudgetItem): boolean {
+    const itemMonth = this.getItemMonth(item);
+
+    if (itemMonth === this.currentMonth.month) {
+      this.currentMonth.addExpenseToCalendar(item);
+      this.currentMonth.updateDailyTotals();
+      this.updateTotals();
+    } else if (itemMonth === this.nextMonth.month) {
+      this.nextMonth.addExpenseToCalendar(item);
+      this.nextMonth.updateDailyTotals();
+    } else {
+      window.alert('Please select a date in either the current month or next month.');
+      return false;
+    }
+    return true;
+  }
+
+  addIncome(item: IBudgetItem): boolean {
+    const itemMonth = this.getItemMonth(item);
+
+    if (itemMonth === this.currentMonth.month) {
+      this.currentMonth.addIncomeToCalendar(item);
+      this.updateTotals();
+    } else if (itemMonth === this.nextMonth.month) {
+      this.nextMonth.addIncomeToCalendar(item);
+      this.updateTotals();
+    } else {
+      window.alert('Please select a date in either the current month or next month.');
+      return false;
+    }
+    return true;
+  }
+
   addToLocalStorage() {
     const localStorageAvailable = this.storageAvailable('localStorage');
 
@@ -54,12 +94,7 @@ export class BudgetService {
       };
 
       this.storage.cachedMonths = JSON.stringify(cachedMonths);
-    } else {
-      console.log(localStorageAvailable);
     }
-
-    console.log('set:');
-    console.log(this.storage.cachedMonths);
   }
 
   private getLocalStorage() {
@@ -154,10 +189,21 @@ export class BudgetService {
     if (this.currentMonth.startingBalance !== startingBalance) {
       this.currentMonth.startingBalance = startingBalance;
       this.currentMonth.updateDailyTotals();
-      this.nextMonth.startingBalance = this.currentMonth.remainder;
+      this.updateTotals();
 
       this.addToLocalStorage();
     }
+  }
+
+  updateTotals() {
+    this.currentMonth.updateDailyTotals();
+    this.currentMonth.updateExpenseTotal();
+    this.currentMonth.updateIncomeTotal();
+
+    this.nextMonth.startingBalance = this.currentMonth.remainder;
+    this.nextMonth.updateDailyTotals();
+    this.nextMonth.updateExpenseTotal();
+    this.nextMonth.updateIncomeTotal();
   }
 
   getCurrentCalendarMonth(): Observable<Calendar> {

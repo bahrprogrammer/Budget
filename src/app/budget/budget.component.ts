@@ -29,8 +29,11 @@ export class BudgetComponent implements OnInit {
 
   addExpense(formDirective: FormGroupDirective) {
     const item: IBudgetItem = this.expenseForm.value;
+    const success = this.service.addExpense(item);
 
-    this.activeMonth.addExpenseToCalendar(item);
+    if (!success) {
+      return;
+    }
 
     formDirective.resetForm();
     this.expenseForm.reset();
@@ -42,8 +45,11 @@ export class BudgetComponent implements OnInit {
 
   addIncome(formDirective: FormGroupDirective) {
     const item: IBudgetItem = this.incomeForm.value;
+    const success = this.service.addIncome(item);
 
-    this.activeMonth.addIncomeToCalendar(item);
+    if (!success) {
+      return;
+    }
 
     formDirective.resetForm();
     this.incomeForm.reset();
@@ -83,6 +89,11 @@ export class BudgetComponent implements OnInit {
     } else if (month === 'previous') {
       this.getCurrentMonth();
     }
+
+    this.header.expenseTotal = this.activeMonth.expenseTotal;
+    this.header.incomeTotal = this.activeMonth.incomeTotal;
+    this.header.updateChart();
+
     this.initializeExpenseFormGroup();
     this.initializeIncomeFormGroup();
   }
