@@ -11,7 +11,6 @@ import { IBudgetItem } from '../models/interfaces';
 })
 export class BudgetService {
   storage = window.localStorage;
-  storageKey = 'budget-calendar';
 
   currentMonth: Calendar;
   nextMonth: Calendar;
@@ -19,7 +18,6 @@ export class BudgetService {
   expenseList: IBudgetItem[] = [];
   incomeList: IBudgetItem[] = [];
 
-  // @Inject(LOCAL_STORAGE) private storage: StorageService
   constructor() {
     const date: Date = new Date();
     this.currentMonth = this.createCalendar(date);
