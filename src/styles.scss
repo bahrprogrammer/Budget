@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./variables.scss";
 
+* {
+  box-sizing: border-box;
+}
+
 #page-header {
-  background-color: $background-emphasis;    // #e8e3d6; // e8e3d6  faf8f4
+  background-color: $background-emphasis;
 }
 
 .card-header {
@@ -11,6 +15,8 @@
 
 body {
   background-color: $background;
+  background-image: url(./assets/composition-of-calculator-with-paper-money-and-notebook-with-4386341.jpg);
+  background-size: cover;
 }
 
 html, body { height: 100%; }

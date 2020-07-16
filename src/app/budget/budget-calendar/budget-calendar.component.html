@@ -9,6 +9,7 @@
               <svg class="bi bi-caret-left-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 00-1.659-.753l-5.48 4.796a1 1 0 000 1.506z"/>
               </svg>
+              <small>Previous month</small>
       </button>
     </div>
     <div>
@@ -17,63 +18,62 @@
               data-toggle="tooltip"
               title="Next month"
               (click)="switchMonthView('next')">
+              <small>Next month</small>
               <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 011.659-.753l5.48 4.796a1 1 0 010 1.506z"/>
               </svg>
       </button>
     </div>
   </div>
-  <div class="row justify-content-center ml-3">
-    <div class="table-responsive d-print-table">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Sun</th>
-            <th scope="col">Mon</th>
-            <th scope="col">Tue</th>
-            <th scope="col">Wed</th>
-            <th scope="col">Thu</th>
-            <th scope="col">Fri</th>
-            <th scope="col">Sat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of calendar.currentMonthInWeeks">
-            <td *ngFor="let d of row" class="day-cell text-truncate">
-              <div *ngIf="d" class="d-flex h-100">
-                <div class="align-self-start text-left w-25">
-                  <span class="badge badge-pill badge-dark mr-1">{{d.day}}</span>
-                </div>
-                <div class="d-flex flex-column flex-fill text-truncate h-100">
-                  <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0">
-                    <li *ngFor="let item of d.dailyIncome" class="calendar-item text-right text-truncate">
-                      <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{item.source}}: {{item.amount | currency}}">{{item.source}}: {{item.amount | currency}}</small>
-                    </li>
-                    <hr class="p-0 m-0" *ngIf="d.dailyExpenses.length > 0">
-                  </ul>
-                  <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0">
-                    <li *ngFor="let item of d.dailyExpenses" class="calendar-item text-right text-truncate">
-                      <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{item.source}}: -{{item.amount | currency}}">{{item.source}}: -{{item.amount | currency}}</small>
-                    </li>
-                  </ul>
-                  <div class="mt-auto ml-auto">
-                    <hr class="p-0 m-0" *ngIf="d.dailyIncome.length > 0 || d.dailyExpenses.length > 0">
-                    <small class="font-weight-bold"
-                           data-toggle="tooltip"
-                           data-placement="top"
-                           title="Balance: {{d.dailyTotal | currency}}"
-                           class="badge badge-pill badge-danger calendar-item text-right"
-                           [ngClass]="{'badge-success': d.dailyTotal > dangerLimit,
-                                        'badge-danger': d.dailyTotal <= dangerLimit}">
-                      {{d.dailyTotal | currency}}
-                    </small>
-                  </div>
+  <div class="table-responsive d-print-table">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Sun</th>
+          <th scope="col">Mon</th>
+          <th scope="col">Tue</th>
+          <th scope="col">Wed</th>
+          <th scope="col">Thu</th>
+          <th scope="col">Fri</th>
+          <th scope="col">Sat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of calendar.currentMonthInWeeks">
+          <td *ngFor="let d of row" class="day-cell text-truncate">
+            <div *ngIf="d" class="d-flex h-100">
+              <div class="align-self-start text-left w-25">
+                <span class="badge badge-pill badge-dark mr-1">{{d.day}}</span>
+              </div>
+              <div class="d-flex flex-column flex-fill text-truncate h-100">
+                <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0">
+                  <li *ngFor="let item of d.dailyIncome" class="calendar-item text-right text-truncate">
+                    <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{item.source}}: {{item.amount | currency}}">{{item.source}}: {{item.amount | currency}}</small>
+                  </li>
+                  <hr class="p-0 m-0" *ngIf="d.dailyExpenses.length > 0">
+                </ul>
+                <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0">
+                  <li *ngFor="let item of d.dailyExpenses" class="calendar-item text-right text-truncate">
+                    <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{item.source}}: -{{item.amount | currency}}">{{item.source}}: -{{item.amount | currency}}</small>
+                  </li>
+                </ul>
+                <div class="mt-auto ml-auto">
+                  <hr class="p-0 m-0" *ngIf="d.dailyIncome.length > 0 || d.dailyExpenses.length > 0">
+                  <small class="font-weight-bold"
+                         data-toggle="tooltip"
+                         data-placement="top"
+                         title="Balance: {{d.dailyTotal | currency}}"
+                         class="badge badge-pill badge-danger calendar-item text-right"
+                         [ngClass]="{'badge-success': d.dailyTotal > dangerLimit,
+                                      'badge-danger': d.dailyTotal <= dangerLimit}">
+                    {{d.dailyTotal | currency}}
+                  </small>
                 </div>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

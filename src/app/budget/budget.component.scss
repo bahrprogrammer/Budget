@@ -1,5 +1,9 @@
 @import "../../variables.scss";
 
+#budget {
+  background-color: $background;
+}
+
 input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
