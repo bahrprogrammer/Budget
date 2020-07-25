@@ -4,6 +4,22 @@
   background-color: $background;
 }
 
+#main {
+  flex-direction: row;
+}
+
+#budget-list {
+  flex-direction: column;
+  flex: 1;
+  max-width: 35vw;
+  font-size: .85rem;
+}
+
+#budget-calendar {
+  flex: 2;
+  max-width: 65vw;
+}
+
 input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
@@ -27,5 +43,27 @@ input[type=date]::-webkit-inner-spin-button {
     width: 100%;
     padding: 0em;
     margin: auto;
+  }
+}
+
+@media(max-width: 500px) {
+  #main {
+    flex-direction: column;
+  }
+
+  #budget-list {
+    max-width: 100vw;
+  }
+}
+
+@media(max-width: 768px) {
+  #main {
+    flex-direction: column;
+    max-width: 100vw;
+  }
+
+  #budget-list {
+    flex-direction: row;
+    max-width: 100vw;
   }
 }

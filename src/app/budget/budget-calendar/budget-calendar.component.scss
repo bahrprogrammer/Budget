@@ -1,59 +1,61 @@
 @import "../../../variables.scss";
 
+* {
+  box-sizing: border-box;
+}
+
 #calendar {
-  padding: 1em;
+  padding: .5rem;
 }
 
 .day-cell {
-  min-width: 5em;
   vertical-align: bottom;
-  padding: 0em;
-  padding-left: .25em;
-  padding-right: .25em;
-}
-
-.calendar-item {
-  font-weight: 550;
-}
-
-.balance {
-  font-weight: 550;
+  padding: 0;
+  padding-left: .25rem;
+  padding-right: .25rem;
 }
 
 .badge-dark {
   background: $border;
 }
 
-.table tbody tr, .table tbody td {
-  height: 6em;
-  max-width: 7em;
+.badge-pill {
+  padding-right: .3em;
+  padding-left: .3em;
+  border-radius: 5rem;
+}
+
+.table tbody td {
+  height: 6rem;
+  max-width: 6rem;
 }
 
 .table-bordered tbody tr {
-  border: 2px solid $border;
+  border: 1px solid $border;
 }
 
 .table-bordered tbody tr td {
-  border: 2px solid $border;
+  border: 1px solid $border;
 }
 
 .table-bordered thead tr {
-  border: 2px solid $border;
+  border: 1px solid $border;
   background: $background-emphasis;
 }
 
 .table-bordered thead tr th {
-  border: 2px solid $border;
+  padding: 0;
+  border: 1px solid $border;
 }
 
 .table-bordered {
-  border: 2px solid $border;
+  border: 1px solid $border;
 }
 
 @media print {
-  .table tbody tr, .table tbody td {
-    height: 6em;
-    max-width: 10em;
-    padding: 0em;
+  .table tbody td {
+    height: 6rem;
+    max-width: 10rem;
+    padding: 0rem;
   }
 }
