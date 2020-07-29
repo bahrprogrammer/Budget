@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 
 #budget {
-  background-color: $background;
+  background-color: rgba($color: $background, $alpha: 0.85);
 }
 
 #main {
@@ -13,6 +13,7 @@
   flex: 1;
   max-width: 35vw;
   font-size: .85rem;
+  font-weight: 500;
 }
 
 #budget-calendar {

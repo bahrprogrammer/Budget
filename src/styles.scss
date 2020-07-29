@@ -3,21 +3,27 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-#page-header {
-  background-color: $background-emphasis;
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, sans-serif; }
 
-.card-header {
-  background-color: $background-emphasis;
-}
 
 body {
   background-color: $background;
   background-image: url(./assets/composition-of-calculator-with-paper-money-and-notebook-with-4386341.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   background-size: cover;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+#page-header {
+  background-color: rgba($color: $background-emphasis, $alpha: 0.8);
+}
+
+.card-header {
+  background-color: rgba($color: $background-emphasis, $alpha: 1);
+}
