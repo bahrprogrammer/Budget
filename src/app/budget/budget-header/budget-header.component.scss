@@ -1,6 +1,6 @@
 @import "../../../variables.scss";
 
 .bordered {
-  border: 2px solid $border;
+  border-bottom: 1px solid $border;
   background-color: $background-emphasis;
 }
