@@ -1,6 +1,7 @@
 @import "../../../variables.scss";
 
-.bordered {
+#budget-header {
   border-bottom: 1px solid $border;
   background-color: $background-emphasis;
+  width: 100%;
 }

@@ -4,7 +4,7 @@
 
   <section id="main" class="d-flex">
 
-    <div id="budget-list" class="d-print-none">
+    <div id="budget-list" class="d-flex d-print-none">
       <div id="income">
         <h3 class="mt-3">Income</h3>
         <form (ngSubmit)="addIncome(formDirective)" #formDirective="ngForm" [formGroup]="incomeForm">
