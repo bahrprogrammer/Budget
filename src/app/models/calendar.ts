@@ -86,7 +86,7 @@ export class Calendar {
     this.currentMonthInWeeks.push(firstWeekData.week);
     day = firstWeekData.day;
 
-    for (let j = 0; j < 4; j++) {
+    for (let j = 0; j < 5; j++) {
       if (day >= daysInMonth) {
         break;
       }
