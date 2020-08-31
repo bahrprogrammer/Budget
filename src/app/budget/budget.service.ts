@@ -20,6 +20,7 @@ export class BudgetService {
 
   constructor() {
     const date: Date = new Date();
+    date.setDate(1);
     this.currentMonth = this.createCalendar(date);
     this.currentMonth.currentMonth = true;
 
