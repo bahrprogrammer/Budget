@@ -25,55 +25,62 @@
       </button>
     </div>
   </div>
-  <div>
-    <div class="card-group">
-      <div class="card week-header">
-        <div class="card-title">Sun</div>
-      </div>
-      <div class="card week-header">
-        <div class="card-title">Mon</div>
-      </div>
-      <div class="card week-header">
-        <div class="card-title">Tue</div>
-      </div>
-      <div class="card week-header">
-        <div class="card-title">Wed</div>
-      </div>
-      <div class="card week-header">
-        <div class="card-title">Thu</div>
-      </div>
-      <div class="card week-header">
-        <div class="card-title">Fri</div>
-      </div>
-      <div class="card week-header">
-        <div class="card-title">Sat</div>
+  <div class="px-2">
+    <div class="row">
+      <div class="card-group w-100">
+        <div class="card week-header">
+          <div class="card-title">Sun</div>
+        </div>
+        <div class="card week-header">
+          <div class="card-title">Mon</div>
+        </div>
+        <div class="card week-header">
+          <div class="card-title">Tue</div>
+        </div>
+        <div class="card week-header">
+          <div class="card-title">Wed</div>
+        </div>
+        <div class="card week-header">
+          <div class="card-title">Thu</div>
+        </div>
+        <div class="card week-header">
+          <div class="card-title">Fri</div>
+        </div>
+        <div class="card week-header">
+          <div class="card-title">Sat</div>
+        </div>
       </div>
     </div>
-    <div class="card-group" id="weeks" *ngFor="let row of calendar.currentMonthInWeeks">
-      <div class="card" *ngFor="let d of row">
-        <div *ngIf="d">
-          <h6 class="card-title pl-2 text-left"><span class="badge badge-pill badge-dark">{{d.day}}</span></h6>
-          <div class="card-body p-1 text-right">
-            <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0">
-              <li *ngFor="let item of d.dailyIncome" class="calendar-item text-right text-truncate">
-                <small class="" data-toggle="tooltip" data-placement="top" title="{{item.source}}: {{item.amount | currency}}">{{item.source}}: {{item.amount | currency}}</small>
-              </li>
-            </ul>
-            <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0">
-              <li *ngFor="let item of d.dailyExpenses" class="calendar-item text-right text-truncate">
-                <small class="" data-toggle="tooltip" data-placement="top" title="{{item.source}}: -{{item.amount | currency}}">{{item.source}}: -{{item.amount | currency}}</small>
-              </li>
-            </ul>
+    <div class="row" id="weeks" *ngFor="let row of calendar.currentMonthInWeeks">
+      <div class="card-group w-100">
+        <div class="card" *ngFor="let d of row">
+          <div *ngIf="d" class="h-100">
+            <h6 class="card-title px-1 text-left"><span class="badge badge-pill badge-dark">{{d.day}}</span></h6>
+            <div class="card-body p-1 text-right">
+              <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0">
+                <li *ngFor="let item of d.dailyIncome" class="calendar-item text-right text-truncate">
+                  <small class="" data-toggle="tooltip" data-placement="top" title="{{item.source}}: {{item.amount | currency}}">{{item.source}}: {{item.amount | currency}}</small>
+                </li>
+              </ul>
+              <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0">
+                <li *ngFor="let item of d.dailyExpenses" class="calendar-item text-right text-truncate">
+                  <small class="" data-toggle="tooltip" data-placement="top" title="{{item.source}}: -{{item.amount | currency}}">{{item.source}}: -{{item.amount | currency}}</small>
+                </li>
+              </ul>
+            </div>
+            <div class="card-footer text-right p-1">
+              <span data-toggle="tooltip"
+                     data-placement="top"
+                     title="Balance: {{d.dailyTotal | currency}}"
+                     class="badge badge-pill badge-danger"
+                     [ngClass]="{'badge-success': d.dailyTotal > dangerLimit,
+                                  'badge-danger': d.dailyTotal <= dangerLimit}">
+                  {{d.dailyTotal | currency}}
+              </span>
+            </div>
           </div>
-          <div class="card-footer text-right p-1">
-            <span data-toggle="tooltip"
-                   data-placement="top"
-                   title="Balance: {{d.dailyTotal | currency}}"
-                   class="badge badge-pill badge-danger"
-                   [ngClass]="{'badge-success': d.dailyTotal > dangerLimit,
-                                'badge-danger': d.dailyTotal <= dangerLimit}">
-                {{d.dailyTotal | currency}}
-            </span>
+          <div *ngIf="!d">
+            <div class="h-100"></div>
           </div>
         </div>
       </div>

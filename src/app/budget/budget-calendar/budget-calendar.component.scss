@@ -1,7 +1,7 @@
 @import "../../../variables.scss";
 
 #calendar {
-  padding: .25rem;
+  padding: .5rem;
 }
 
 .badge-dark {
@@ -37,6 +37,7 @@
 
 #weeks .card-body {
   min-height: 4rem;
+  min-height: calc(100% - 52px);
 }
 
 #weeks .card-footer {
