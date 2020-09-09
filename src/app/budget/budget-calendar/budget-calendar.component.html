@@ -25,55 +25,58 @@
       </button>
     </div>
   </div>
-  <div class="table d-print-table">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Sun</th>
-          <th scope="col">Mon</th>
-          <th scope="col">Tue</th>
-          <th scope="col">Wed</th>
-          <th scope="col">Thu</th>
-          <th scope="col">Fri</th>
-          <th scope="col">Sat</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of calendar.currentMonthInWeeks">
-          <td *ngFor="let d of row" class="day-cell text-truncate">
-            <div *ngIf="d" class="d-flex h-100">
-              <div class="align-self-start text-left w-25">
-                <span class="badge badge-pill badge-dark mr-1">{{d.day}}</span>
-              </div>
-              <div class="d-flex flex-column flex-fill text-truncate h-100">
-                <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0">
-                  <li *ngFor="let item of d.dailyIncome" class="calendar-item text-right text-truncate">
-                    <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{item.source}}: {{item.amount | currency}}">{{item.source}}: {{item.amount | currency}}</small>
-                  </li>
-                  <hr class="p-0 m-0" *ngIf="d.dailyExpenses.length > 0">
-                </ul>
-                <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0">
-                  <li *ngFor="let item of d.dailyExpenses" class="calendar-item text-right text-truncate">
-                    <small class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{item.source}}: -{{item.amount | currency}}">{{item.source}}: -{{item.amount | currency}}</small>
-                  </li>
-                </ul>
-                <div class="mt-auto ml-auto">
-                  <hr class="p-0 m-0" *ngIf="d.dailyIncome.length > 0 || d.dailyExpenses.length > 0">
-                  <small class="font-weight-bold"
-                         data-toggle="tooltip"
-                         data-placement="top"
-                         title="Balance: {{d.dailyTotal | currency}}"
-                         class="badge badge-pill badge-danger calendar-item text-right"
-                         [ngClass]="{'badge-success': d.dailyTotal > dangerLimit,
-                                      'badge-danger': d.dailyTotal <= dangerLimit}">
-                    {{d.dailyTotal | currency}}
-                  </small>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div>
+    <div class="card-group">
+      <div class="card week-header">
+        <div class="card-title">Sun</div>
+      </div>
+      <div class="card week-header">
+        <div class="card-title">Mon</div>
+      </div>
+      <div class="card week-header">
+        <div class="card-title">Tue</div>
+      </div>
+      <div class="card week-header">
+        <div class="card-title">Wed</div>
+      </div>
+      <div class="card week-header">
+        <div class="card-title">Thu</div>
+      </div>
+      <div class="card week-header">
+        <div class="card-title">Fri</div>
+      </div>
+      <div class="card week-header">
+        <div class="card-title">Sat</div>
+      </div>
+    </div>
+    <div class="card-group" id="weeks" *ngFor="let row of calendar.currentMonthInWeeks">
+      <div class="card" *ngFor="let d of row">
+        <div *ngIf="d">
+          <h6 class="card-title pl-2 text-left"><span class="badge badge-pill badge-dark">{{d.day}}</span></h6>
+          <div class="card-body p-1 text-right">
+            <ul *ngIf="d.dailyIncome.length > 0" class="list-unstyled m-0">
+              <li *ngFor="let item of d.dailyIncome" class="calendar-item text-right text-truncate">
+                <small class="" data-toggle="tooltip" data-placement="top" title="{{item.source}}: {{item.amount | currency}}">{{item.source}}: {{item.amount | currency}}</small>
+              </li>
+            </ul>
+            <ul *ngIf="d.dailyExpenses.length > 0" class="list-unstyled m-0">
+              <li *ngFor="let item of d.dailyExpenses" class="calendar-item text-right text-truncate">
+                <small class="" data-toggle="tooltip" data-placement="top" title="{{item.source}}: -{{item.amount | currency}}">{{item.source}}: -{{item.amount | currency}}</small>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer text-right p-1">
+            <span data-toggle="tooltip"
+                   data-placement="top"
+                   title="Balance: {{d.dailyTotal | currency}}"
+                   class="badge badge-pill badge-danger"
+                   [ngClass]="{'badge-success': d.dailyTotal > dangerLimit,
+                                'badge-danger': d.dailyTotal <= dangerLimit}">
+                {{d.dailyTotal | currency}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
