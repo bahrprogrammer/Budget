@@ -35,7 +35,7 @@ export class BudgetService {
 
   getItemMonth(item: IBudgetItem) {
     const monthString = (item.date.toString()).substr(5, 2);
-    const itemMonth = parseInt(monthString, 16) - 1;
+    const itemMonth = parseInt(monthString, 10) - 1;
 
     return itemMonth;
   }
