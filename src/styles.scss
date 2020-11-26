@@ -27,3 +27,6 @@ body {
 .card-header {
   background-color: rgba($color: $background-emphasis, $alpha: 1);
 }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
